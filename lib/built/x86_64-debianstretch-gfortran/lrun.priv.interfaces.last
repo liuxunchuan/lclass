@@ -1,0 +1,38 @@
+  interface
+    subroutine lrun(line,error,user_function)
+      use gildas_def
+      use gbl_message
+      use lclass_data
+      use lclass_merge_structure
+      !--------------------------
+      ! @ private
+      !--------------------------
+      character(len=*), intent(in)   :: line
+      logical,intent(out)            :: error
+      logical,external               :: user_function
+    end subroutine lrun
+  end interface
+  !
+  interface
+    subroutine do_merge(obs,extr,error)
+       use gbl_constant
+       use gbl_message
+       use lclass_types
+       use lclass_merge_structure
+      !---------------------------------------------------------------------
+      ! @ private
+      ! Sum over hyperfine liens
+      ! Must have been set before:
+      ! - extr%rname
+      ! - extr%c1
+      ! - extr%c2
+      ! - extr%nc
+      !  For efficiency purpose, assume that extr%c1 and extr%c2 are already
+      !  sorted.
+      !---------------------------------------------------------------------
+      type(observation), intent(inout)    :: obs   ! observation
+      type(extract_t), intent(in)         :: extr  ! extraction descriptor
+      logical, intent(inout)              :: error ! logical error flag
+    end subroutine do_merge
+  end interface
+  !

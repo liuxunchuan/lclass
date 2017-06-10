@@ -1,0 +1,21 @@
+  interface
+    subroutine init_lclass(user_function)
+      use gbl_message
+      !---------------------------------------------------------------------
+      ! @ private
+      ! LLAS initialization routine
+      !---------------------------------------------------------------------
+      external :: user_function         !
+    end subroutine init_lclass
+  end interface
+  !
+  interface
+    subroutine exit_lclass
+      use gbl_message
+      !---------------------------------------------------------------------
+      ! @ private
+      !
+      !---------------------------------------------------------------------
+    end subroutine exit_lclass
+  end interface
+  !

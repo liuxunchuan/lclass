@@ -1,0 +1,31 @@
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+! CLASS program general information
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!
+!
+if (exist(weeds)) then
+  message r welcome " "
+  message r welcome " * Loaded extensions"
+  message r welcome "    weeds (S.Maret, P.Hily-Blant, J.Pety, S.Bardeau, E.Reynier)"
+endif
+message r welcome " "
+message r welcome " * lclass extention:          Liu Xunchuan"
+message r welcome " * class charge:              J.Pety, S.Bardeau"
+message r welcome "   Active developers:      P.Hily-Blant, S.Guilloteau"
+message r welcome "   Main past contributors: T.Forveille, R.Lucas"
+message r welcome " "
+message r welcome " * The  behavior  of  the  AVERAGE  and  ACCUMULATE  commands  was"
+message r welcome "   improved. See HELP AVERAGE|ACCUMULATE for details  on  the  new"
+message r welcome "   behavior. In a  transition  period  the  old  behavior  can  be"
+message r welcome "   retrieved through the /2010 option."
+message r welcome " "
+message r welcome " * For more information, look at the HELP menu of the LCLASS/CLASS widget"
+message r welcome " "
+message r welcome " * Questions? Comments? Bug reports? Mail to: gildas@iram.fr"
+message r welcome " "
+message r welcome " * For help, type HELP and/or INPUT at the LCLASS prompt"
+message r welcome " "
+!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

@@ -1,0 +1,27 @@
+  interface
+    subroutine llas_setdef(error)
+      use gildas_def
+      use gbl_constant
+      use phys_const
+      use lclass_setup
+      !---------------------------------------------------------------------
+      ! @ private
+      ! LCLASS Internal routine
+      !  Setup default parameters
+      !---------------------------------------------------------------------
+      logical, intent(out) :: error  ! Error flag
+    end subroutine llas_setdef
+  end interface
+  !
+  interface
+    subroutine llas_setup
+      use gildas_def
+      !---------------------------------------------------------------------
+      ! @ private
+      ! CLASS Setup routine
+      !  Called only once at startup
+      !---------------------------------------------------------------------
+      ! Local
+    end subroutine llas_setup
+  end interface
+  !

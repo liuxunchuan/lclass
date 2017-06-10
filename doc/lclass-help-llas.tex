@@ -1,0 +1,28 @@
+\subsection{Language}
+\index{Language}
+\begin{verbatim}
+              LLAS\ Command Language Summary
+    (+ indicates a NEW command and - an obsolete command)
+
+     LMETHOD    Selects operation do on spectra
+     LRUN        do operation on spectra describe by LMETHOD
+\end{verbatim}
+\subsection{LMETHOD}
+\index{LMETHOD}
+\begin{verbatim}
+         LLAS\LMETHOD [MERGE|...] FILE
+
+    Selects operation do on spectra.
+      MERGE     Merge hyperfine lines to improve S/N.
+      FILE      File describes hyperfine structure. The first line is number
+                of hyperfine lines (N). Each of the next N lines record
+                velocity and relative intensity. Basicly same as the file
+                format required by LAS\METHOD HFS.
+\end{verbatim}
+\subsection{LRUN}
+\index{LRUN}
+\begin{verbatim}
+         LRUN
+
+    Do operation on spectra describe by LMETHOD.
+\end{verbatim}

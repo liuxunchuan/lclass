@@ -1,0 +1,11 @@
+  interface
+    function lclass_error()
+      !---------------------------------------------------------------------
+      ! @ private
+      ! Support routine for the error status of the library. Does nothing
+      ! here.
+      !---------------------------------------------------------------------
+      logical :: lclass_error  ! Function value on return
+    end function lclass_error
+  end interface
+  !

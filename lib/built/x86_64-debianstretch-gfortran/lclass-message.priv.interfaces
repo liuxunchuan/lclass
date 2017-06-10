@@ -1,0 +1,39 @@
+  interface
+    subroutine lclass_message_set_id(id)
+      use gbl_message
+      !---------------------------------------------------------------------
+      ! @ private
+      ! Alter library id into input id. Should be called by the library
+      ! which wants to share its id with the current one.
+      !---------------------------------------------------------------------
+      integer, intent(in) :: id         !
+    end subroutine lclass_message_set_id
+  end interface
+  !
+  interface
+    subroutine lclass_message(mkind,procname,message)
+      !---------------------------------------------------------------------
+      ! @ private
+      ! Messaging facility for the current library. Calls the low-level
+      ! (internal) messaging routine with its own identifier.
+      !---------------------------------------------------------------------
+      integer,          intent(in) :: mkind     ! Message kind
+      character(len=*), intent(in) :: procname  ! Name of calling procedure
+      character(len=*), intent(in) :: message   ! Message string
+    end subroutine lclass_message
+  end interface
+  !
+  interface
+    subroutine lclass_iostat(mkind,procname,ier)
+      use gbl_message
+      !---------------------------------------------------------------------
+      ! @ private
+      ! Output system message corresponding to IO error code IER, and
+      ! using the MESSAGE routine
+      !---------------------------------------------------------------------
+      integer,          intent(in) :: mkind     ! Message severity
+      character(len=*), intent(in) :: procname  ! Calling routine name
+      integer,          intent(in) :: ier       ! IO error number
+    end subroutine lclass_iostat
+  end interface
+  !

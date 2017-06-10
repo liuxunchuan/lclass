@@ -1,0 +1,42 @@
+.ec _
+.ll 76
+.ad b
+.in 4
+.\"====================================================================
+.ti -4
+1 Language
+.ti +10
+LLAS_\ Command Language Summary
+.br
+(+ indicates a NEW command and - an obsolete command)
+
+.nf
+ LMETHOD    Selects operation do on spectra
+ LRUN        do operation on spectra describe by LMETHOD
+.fi
+.\"====================================================================
+.ti -4
+1 LMETHOD
+.ti +4
+ LLAS_\LMETHOD [MERGE|...] FILE
+
+Selects operation do on spectra.
+.in +2
+.nf
+MERGE     Merge hyperfine lines to improve S/N.
+FILE      File describes hyperfine structure. The first line is number
+          of hyperfine lines (N). Each of the next N lines record
+          velocity and relative intensity. Basicly same as the file
+          format required by LAS\METHOD HFS. 
+.fi
+.in -2
+.\"====================================================================
+.ti -4
+1 LRUN
+.ti +4
+ LRUN
+
+Do operation on spectra describe by LMETHOD.
+.\"====================================================================
+.ti -4
+1 ENDOFHELP

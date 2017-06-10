@@ -1,0 +1,26 @@
+  interface
+    subroutine llas_variables
+      use gildas_def
+      use gbl_message
+      !----------------------------------------------------------------------
+      ! @ private
+      ! LLAS Initialisation routine
+      !  Defines all SIC variables
+      !----------------------------------------------------------------------
+    end subroutine llas_variables
+  end interface
+  !
+  interface
+    subroutine lclass_set_structure(error)
+      use gildas_def
+      use gbl_message
+      use lclass_setup
+      !---------------------------------------------------------------------
+      ! @ private
+      ! LLAS internal routine
+      !   Define the SIC variables which map the internal set% values.
+      !---------------------------------------------------------------------
+      logical, intent(inout) :: error  ! Logical error flag
+    end subroutine lclass_set_structure
+  end interface
+  !

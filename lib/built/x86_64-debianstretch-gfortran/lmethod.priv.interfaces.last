@@ -1,0 +1,32 @@
+  interface
+    subroutine lmethod(line,error)
+      use gildas_def
+      use gbl_message
+      use lclass_setup
+      use lclass_merge_structure
+      !----------------------------------------------------------------------
+      ! @ private
+      ! ANALYSE Support routine for command
+      ! LMETHOD  MERGE filename
+      !          ...
+      ! Select the method for fitting
+      !----------------------------------------------------------------------
+      character(len=*), intent(in)  :: line  ! Command line
+      logical,          intent(out) :: error ! Error flag
+    end subroutine lmethod
+  end interface
+  !
+  interface
+    subroutine raimerge(chain,error)
+      use gildas_def
+      use gbl_message
+      use lclass_merge_structure
+      !-------------------------------------------------------------------
+      ! @ private
+      ! Read parameters of merge multiplet hyperfine lines
+      !-------------------------------------------------------------------
+      character(len=*), intent(in)  :: chain
+      logical,          intent(out) :: error
+    end subroutine raimerge
+  end interface
+  !

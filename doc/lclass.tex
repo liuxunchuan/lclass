@@ -1,0 +1,623 @@
+\documentclass[11pt]{article}
+
+% GILDAS specific definitions
+\include{gildas-def}
+
+\title {Flux measurements with the \\
+  IRAM Plateau de Bure Interferometer}%
+\author {A.Dutrey$^1$, S.Guilloteau$^1$}%
+\date{Document probably older than you think}%
+\makeindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle{}
+
+\begin{center}
+  Version 1.2
+\end{center}
+
+\begin{center}
+  (1) Institut de Radio Astronomie Millim\'etrique\\
+  300 Rue de la Piscine\\
+  F-38406 Saint Martin d'H\`eres
+\end{center}
+
+This document sums up the methods for flux measurements which are available
+at the IRAM Plateau de Bure Interferometer.  These methods are still
+experimental and under development and improvements.  All comments from
+enthusiastic or angry astronomers and/or operators are welcome.
+
+\begin{rawhtml}
+  Note: this is the on-line version of the "Flux Measurements" A <A
+  HREF="../../pdf/lclass.pdf"> PDF version</A> is also available.
+\end{rawhtml}
+
+Related information is available in:
+\begin{latexonly}
+\begin{itemize}
+\item{CLASS: Continuum and Line Analysis Simple Software}
+\item{CLIC: Continuum and Line Interferometric Calibration}
+\item{ASTRO: Astronomical Software To pRepare Observations}
+\item{GILDAS: Grenoble Image and Line Data Analysis Software}
+\end{itemize}
+\end{latexonly}
+
+\begin{rawhtml}
+  <UL>
+  <LI> IRAM Plateau de Bure Interferometer: <A HREF="../clic-html/clic.html"> Continuum and Line Interferometer Calibration</A>
+  <LI> <A HREF="../class-html/class.html"> Continuum and Line Analysis Single-dish Software</A>
+  <LI> <A HREF="../astro-html/astro.html"> ASTRO:</A>  A Software to pRepare Observations
+  <LI> <A HREF="../greg-html/greg.html"> GreG:</A> Grenoble Graphics
+  <LI> <A HREF="../gildas-intro-html/gildas-intro.html"> GILDAS:</A> Grenoble Image and Line Data Analysis Software
+\end{rawhtml}
+
+Revision 1.0: Basic documentation\\
+Revision 1.1: Introduction of program FLUX.\\
+Revision 1.2: Determination of flux scale for a project\\
+Revision 2.0: Coordination with 30-m (in preparation).
+
+\newpage
+\tableofcontents
+
+\newpage
+
+\section{Introduction}
+
+\subsection{The Need for Flux Calibration}
+
+Because of the variable amount of decorrelation introduced by phase noise,
+an interferometer cannot easily measure absolute fluxes. All measurements
+are relative to some source of known flux. In practice, planets are used
+because they are among the few astronomical objects sufficiently strong at
+millimeter wavelength for which flux density predictions are possible and
+with
+
+Planets are too big to be measured directly in interferometry, except for
+the smallest at short baselines. Thus, single-dish measurements are used to
+bootstrap the flux of strong quasars (point sources) from the planets.
+Weaker sources are then referred to stronger ones in interferometry because
+single-dish measurements are not sensitive enough.
+
+Since the quasars are highly variable, we need to observe at least the flux
+from the strongest of them (single-dish measurements) each month.  Because
+of this variability, an error in the flux scale during one configuration
+does not result in a simple scale factor in the final image, but introduces
+severe artefacts.
+
+Accordingly, flux measurements have to be considered as a HIGH priority
+project on the interferometer, since they may ultimately limit the image
+quality. Special observing dates are selected from the best possibilities
+offered by the planets visibilities.  In order to interpolate the flux for
+all the frequencies available at the Plateau de Bure Interferometer, we
+need one frequency at each edge of the frequency band to derive the
+spectral index of each source.
+
+
+\subsection{Calibration Procedure}
+
+Because of the physics of quasars, the spectral index may be variable with
+time as the source intensity. Almost simultaneous measurements at 2
+frequencies are thus needed to estimate it accurately. In practice, it is
+impossible to follow all the $\simeq$ 100 quasars used as phase reference
+at the IRAM interferometer. Even following the $\simeq$ 20 ones typically
+used during a 4 month observing period is a time consuming task.
+
+Accordingly, only a handful of strong quasars are monitored frequently, at
+2 frequencies. These are the strongest quasars, typically used for bandpass
+calibration by all projects. A complementary flux check is done using the
+continuum source W3OH. As it is partially resolved by the interferometer, a
+model of the emission is however necessary.  This additional procedure will
+be available soon.
+
+
+To make the monitoring of strong quasars easy, for the observations and for
+the analysis, but also to minimize the calibration errors, a standard
+observing procedure has been devised.  The two frequencies selected
+correspond to the SiOv1 line at 86 GHz and 13CO(2-1) line at 210 GHz. As
+the calibration accuracy is a crucial point, fluxes must be measured only
+by very good weather.
+
+Of course, short ``holes'' (1 or 2 hours) in the observations by good
+weather can also be used to observe fluxes using the current frequency
+tuning but have to be considered as ``COMPLEMENTARY'' data. One need to
+obtain a few precise measurements at fixed frequencies rather than lots of
+data taken in incertain conditions.
+
+ 
+\section{Observing procedure}
+
+The procedure {\tt FLUX} (corresponding to the project {\tt FLUX}) is
+similar to {\tt BASE} or {\tt POINT} and runs under the \obs\ program.
+This procedure makes flux measurements in single-dish, multi-dish or
+interferometric mode. For commodity and a better calibration accuracy, it
+uses only the two following frequencies: SiOv1 at 86 GHz and 13CO(2-1) at
+210 GHz. A third option allows using the current frequency tuning for only
+SMALL ``holes'' between two projects.
+
+To start it, just type {\tt @ PR:FLUX} then answer the questions about
+frequency choice, observing mode and so on...
+
+\subsection{ Single and Multi-dish mode}
+
+Observations in multi and single-dish modes are made using pointings
+cross-scans in beam-switching mode after a careful CALIBRATION at the
+source elevation.  Calibrations on planets are made off source to avoid
+contamination by source emission (although even Saturn contributes to only
+6 K to the total noise).  Skydips at the beginning and/or end of
+observations can provide us a better estimate of the calibration accuracy.
+Several pointing scans may be done at various elevations.  Before starting
+the observations, tests of the beam-switch and the value (or measure) of
+the Gains USB/LSB are automatically asked.  The gain value is used with USB
+and LSB frequencies to calculate a weighted flux of the planets, including
+the gain USB/LSB.  If it is impossible to measure the gain correctly (1 or
+2 antennas only), be careful about the value you enter (ask the operator on
+duty).
+
+The planets are selected in priority at the beginning of the observations,
+a flag counts the planets measurements and signals when no planet is
+available.  Afterwards, only the brightest quasars are observed :
+
+\begin{flushleft}
+  {Table 1: Strong sources observed in single-dish mode (Apr-1992).}
+  \vskip 0.1 cm
+\begin{tabular}{|l|l|}
+\hline
+\hline
+3C84 & \\
+3C273 & \\
+3C279 & (1) \\
+3C345 & \\
+3C454.3 & \\
+NRAO530 & (2) \\
+0420-014 & \\
+0851+202 & (2) \\
+\hline
+W3OH & \\
+\hline
+\hline
+\end{tabular}
+\vskip 0.1 cm
+(1) Not used, too close to 3C273. \\
+(2) Sometimes used, but may be too weak. \\
+\end{flushleft}
+
+\subsection{ Interferometric mode}
+
+Observations in the interferometric mode can be done using either
+cross-correlations or pointing scans. Using pointing scans, a correction
+from pointing errors is possible (see section ``Reduction method'').  The
+procedure asks for the measurements of the gain USB/LSB value (same remark
+as above).
+
+In addition to the brightest quasars mentionned above, several phase
+calibrators (secondary flux calibrators) are also selected by this
+procedure.  The list is variable, but typically includes a few weaker
+sources frequently used on observing projects. For example in April 1992:
+
+\begin{flushleft}
+  {Table 2: Secondary calibrators observed in interferometric mode} \vskip
+  0.1 cm
+\begin{tabular}{|l|}
+\hline
+\hline
+0851+202\\
+NRAO530\\
+2200+420\\
+3C120\\
+\\
+\\
+\\
+\hline
+\hline
+\end{tabular}
+\end{flushleft}
+
+\section{Reduction method}
+
+\subsection{Single-dish}
+
+Single-dish data are analysed using \class\ by Gaussian fits with the
+method {\tt CONTINUUM Beam\_size} which takes into account the dual-beam
+pattern in elevation. Beam width, beam separation and beam ratios are fixed
+for better sensitivity. One planets, these parameters are freed using the
+{\tt GAUSS * * *} command, since the planets are marginally resolved. The
+beam-size is 56 $''$ at 86 GHz.
+
+A typical sequence of single-dish flux reduction is the following:
+\begin{verbatim}
+
+FIL IN 'date'.BUR
+FIL OUT 'flux-date'.BUR      !
+@ PR:INIT_FLUX Teles Line    ! Initialize once
+R Scan
+...
+R Scan      ! Repeat for all scans in the file
+!
+@ PR:INIT_FLUX Teles Line    ! Repeat for other frequencies/Telescopes
+...
+R Scan
+
+\end{verbatim}
+
+The setup procedure {\tt PR:INIT\_FLUX} contains
+\begin{verbatim}
+
+! @ PR:INIT_FLUX Telescope Line
+! Initialize a flux data reduction
+LAS\SET TEL &1           ! Select Telescope 
+LAS\SET LINE &2          ! Select Observed Line
+LAS\SET TYPE CONTINUUM
+LAS\SET ALIGN POSITION
+LAS\SET ANGLE SECOND
+DEVICE                   ! Enter graphics device
+SIC\DEFINE REAL F
+SAY "Enter LO1 frequency in GHz (0 if not known or variable)"
+LET F
+IF (F.GT.80.AND.F.LT.118) THEN
+   Say "The beam-size is:" '86*56|F'  
+   ANALYSE\METHOD CONTINUUM 86*56|F     ! Fix the beam width
+ELSE
+   ANALYSE\METHOD CONTINUUM             ! Let it free if frequency not known
+ENDIF
+SYMBOL R "SIC\@ PR:FLUX"
+\end{verbatim}
+
+{\tt R} is a symbol calling the reduction procedure {\tt PR:FLUX.CLASS}
+\begin{verbatim}
+!
+! CLASS : Reduce a Pointing cross scan to get flux measurements
+!
+! Calling sequence : @ PR:INIT_FLUX
+! Then R Scan_Number (R = "@ PR:FLUX")
+!
+DEFINE INTEGER ISCAN
+DEFINE LOGICAL PLANET
+LET ISCAN &1
+LAS\FIND/SCAN ISCAN
+LET PLANET (SOURCE.EQ."JUPITER".OR.SOURCE.EQ."VENUS".OR.SOURCE.EQ."MARS".OR.-
+SOURCE.EQ."SATURN") 
+!
+LAS\GET FIRST
+LAS\GET NEXT
+LAS\ACCUMULATE
+SET MOD X -110 110
+LAS\PLOT
+SIC\IF PLANET THEN
+   ANALYSE\GAUSS * * *
+ELSE
+   ANALYSE\GAUSS
+ENDIF
+ANALYSE\FIT
+PAUSE   "WRITE the result if it seems OK"
+LAS\GET NEXT
+LAS\GET NEXT
+LAS\ACCUMULATE
+SET MOD X -110 230
+LAS\PLOT
+SIC\IF PLANET THEN
+   ANALYSE\GAUSS * * *
+ELSE
+   ANALYSE\GAUSS
+ENDIF
+ANALYSE\FIT
+PAUSE "WRITE the result if it seems OK"
+SET MOD X -110 110
+\end{verbatim}
+
+When all the reduction is finished, print the fit results from the output
+file
+\begin{verbatim}
+FIL IN 'flux-date'.BUR
+FIND
+PRINT FLUX/OUT 'bur*-frequency-date'.FIT
+\end{verbatim}
+
+The Gaussian fit results are written in a special file (produced by the new
+command {\class\ \tt PRINT FLUX /OUTPUT Filename}) which contains all the
+fit parameters, the antenna number, the signal and image frequencies, the
+gain USB/LSB and the elevation of the source.
+
+This file is then directly analysed using \astro\ with the new language
+FLUX which corresponds to the commands described in section 4.
+
+\subsection{Interferometry}
+
+For cross-correlations, the data reduction is made using \clic . The
+following sequence is used
+\begin{verbatim}
+CLIC\FILE BO 'name'.IPB
+CLIC\SET PROJECT FLUX
+CLIC\FIND
+CLIC\DEVICE
+CLIC\SET BAN USB LSB
+CLIC\SET SUBBANDS C01 TO C10
+CLIC\SET X I_FREQUENCY
+CLIC\SET Y AMPLITUDE PHASE
+! Calibrate RF passband to use DSB mode
+CLIC\FIND/PROC COR/SOUR 'Strong_Quasar'
+CLIC\PLOT
+CLIC\SOLVE RF/PL
+CLIC\FIND/PROC CORR/SOUR *
+CLIC\STORE RF
+CLIC\SET RF ON CHAN
+! Use DSB unless gain ratio is very different from 1
+CLIC\SET BAN DSB
+CLIC\SET FLUX 'Quasar' Flux    ! Specify flux of reference quasar
+CLIC\SET FLUX 'Quasar' Flux    ! More than one allowed
+CLIC\SOLVE FLUX
+CLIC\PRINT FLUX
+\end{verbatim} 
+
+For pointing scans, the option /FLUX file in the command:
+\begin{verbatim}
+CLIC\SOLVE POINTING [/PLOT] /FLUX file
+\end{verbatim}
+processes an output file containing the same information and using the same
+format as the single-dish flux file created by \class .  This file may then
+read directly by the FLUX program.
+
+\section{How to Determine the Absolute Flux Scale on a Project}
+
+Contrarily to a common idea, determining the absolute flux scale in an
+interferometric project is the hardest and finest task of the calibration.
+Furthermore the {\tt CLIC} command {\tt SOLVE FLUX} is very dangerous,
+particularly when used on bad calibrated data.
+
+This command permits the determination of the absolute flux scale which is
+fixed by the {\tt CLIC} command {\tt STORE}.
+
+During this step, all parameters which can vary in time have a critical
+influence on the quality of the final results: POINTING, FOCUS, weather
+(amplitude and phase noise) and can introduce somes biases. POINTING errors
+are the most important but can be easily cancelled by pointing before doing
+the cross-correlations on the RF AND the PHASE CALIBRATOR. The evolution in
+time of the phase noise is most difficult to cancel.  For example, a phase
+noise fluctuation from 15$^o$ to 30$^o$ between the RF bandpass calibrator
+and the phase calibrator introduces on the efficiencies estimates a
+variation of about $\sim$ 5.5 \%.
+
+In order to avoid them, the best solution is to apply the SOLVE FLUX
+command only on a short time interval where the weather conditions: H$_2$O
+vapor contents and phase noise are similar (compare the CALIBRATIONS).
+
+In standard interferometric projects, we find the following data:
+ 
+\begin{verbatim}
+        - POINTING on RF Bandpass Calibrator
+        - CROSS-CORELATION on RF Bandpass Calibrator (typically 1/4h)
+        - POINTINGS on Phase Calibrator (each 2h)
+        - CROSS-CORELATION (by 4min) on Phase Calibrator 
+\end{verbatim}
+
+We us them to determine the absolute flux scale.  Depending of the flux of
+the amplitude (phase) calibrator, there are several possibilities.
+
+\subsection{The Amplitude Calibrator is used for Pointings} 
+ 
+In this case, the flux of the amplitude calibrator will be determined from
+pointings using the RF bandpass calibrator.  The method is the same as
+described in section 3. After doing standard RF and phase calibration, one
+need to reduce the pointing data and write the results in a file. The
+sequence is the following:
+
+\begin{verbatim}
+        CLIC\SET RF ON FREQ
+        CLIC\SET PHASE RELATIVE
+        CLIC\SET BAND DSB
+        CLIC\SET SUB C01 TO C06
+        CLIC\SET SOURCE Phase_Calib RF_CAlib
+        CLIC\SET PROC POINT
+        CLIC\FIND
+        CLIC\SOLVE POINTING/[PLOT]/OUTPUT flux.fit FLUX NEW
+        CLIC\EXIT
+\end{verbatim}
+
+The command
+\begin{verbatim}
+CLIC\SOLVE POINTING [/PLOT] /OUTPUT file FLUX NEW[OLD]
+\end{verbatim}
+processes an output file which can be directly read by the language FLUX in
+{\tt ASTRO}. The section 5 explains how to use this file to derive the flux
+density of the amplitude calibrator using the flux of the Primary
+calibrator (which is given in the flux reports).
+
+When the flux density of the amplitude calibrator is known, update the {\tt
+  CLIC} calibration procedure (described in the ``Calibration Cookbook'')
+as follows:
+
+\begin{verbatim}
+        CLIC\SET SOURCE Phase_Calib RF_CAlib
+        CLIC\SET PROC POINT CORR
+        CLIC\SET FLUX Phase_Calib xx.x
+        CLIC\SET FLUX RF_Calib yy.y
+        CLIC\FIND 
+        CLIC\STORE FLUX (On all cross-correlations) 
+\end{verbatim}  
+Now you can proceed to the standard Amplitude Calibration using
+cross-correlations on the Amplitude Calibrator (see ``Calibration
+Cookbook'').
+
+\subsection{The Amplitude Calibrator is too weak for Pointings}
+
+In this case, only the cross-correlations are used.  Don't forget to apply
+the SOLVE FLUX command only on a short time interval where the weather
+conditions: H$_2$O vapor contents and phase noise are quite similar.
+
+\begin{verbatim}
+   - Select the RF bandpass done usually after a FOCUS and a POINTING 
+   - Select the adjacent Phase Calibrator(s)- it should follow a POINTING
+\end{verbatim}
+
+\begin{verbatim}
+        CLIC\SET RF ON FREQ
+        CLIC\SET PHASE RELATIVE
+        CLIC\SET BAND DSB
+        CLIC\SET SUB L01 TO L06
+        CLIC\SET SOURCE Phase_Calib RF_Calib
+        CLIC\SET FLUX RF_Calib xx.x     !see flux reports
+        CLIC\SET PROC CORR
+        CLIC\FIND /SCAN x y     !After a pointing on RF_Calib
+        CLIC\FIND APPEND /SCAN v w      !After a pointing on Phase_Calib
+        CLIC\SOLVE FLUX 
+\end{verbatim}
+
+When the flux density of the amplitude calibrator is known, update the {\tt
+  CLIC} calibration procedure (described in the ``Calibration Cookbook'')
+as follows:
+
+\begin{verbatim}
+        CLIC\SET SOURCE Phase_Calib RF_CAlib
+        CLIC\SET PROC POINT CORR
+        CLIC\SET FLUX Phase_Calib xx.x
+        CLIC\SET FLUX RF_Calib yy.y
+        CLIC\FIND 
+        CLIC\STORE FLUX (On all cross-correlations) 
+\end{verbatim} 
+ 
+Now you can proceed to the standard Amplitude Calibration using
+cross-correlations on the Amplitude Calibrator (see ``Calibration
+Cookbook'').
+
+\subsection{Using Pointings and Cross-correlations}
+
+A new option in the command SOLVE FLUX has been implemented which allows
+flux densities calculations using either POINTINGS and/or
+CROSS-CORRELATIONS.  This is the command:
+\begin{verbatim}
+        CLIC\SOLVE FLUX /OUTPUT file NEW[OLD]
+\end{verbatim}
+This command, applied on the CROSS-CORRELATIONS, generates an output file
+which can directly be read by he language FLUX in {\tt ASTRO}. It treats
+the CROSS-CORRELATIONS like POINTINGS assuming that positionnal errors are
+``zero''. The scenario is quite similar to the case above:
+
+\begin{verbatim}
+        CLIC\SET RF ON FREQ
+        CLIC\SET PHASE RELATIVE
+        CLIC\SET BAND DSB
+        CLIC\SET SUB L01 TO L06
+        CLIC\SET SOURCE Phase_Calib RF_CAlib
+        CLIC\SET PROC CORR
+        CLIC\SET FLUX RF_Calib xx.x     !see flux reports
+        CLIC\FIND /SCAN x y     !After a pointing on RF_Calib
+        CLIC\FIND APPEND /SCAN v w      !After a pointing on Phase_Calib
+        CLIC\SOLVE FLUX/OUTPUT flux.fit NEW 
+\end{verbatim}
+
+When the flux density of the amplitude calibrator is known, update the {\tt
+  CLIC} calibration procedure (described in the ``Calibration Cookbook'')
+as follows:
+
+\begin{verbatim}
+        CLIC\SET SOURCE Phase_Calib RF_CAlib
+        CLIC\SET PROC POINT CORR
+        CLIC\SET FLUX Phase_Calib xx.x
+        CLIC\SET FLUX RF_Calib yy.y
+        CLIC\FIND 
+        CLIC\STORE FLUX (On all cross-correlations) 
+\end{verbatim} 
+ 
+Now you can proceed to the standard Amplitude Calibration using
+cross-correlations on the Amplitude Calibrator (see ``Calibration
+Cookbook'').
+
+\subsection{Use of W3OH as Flux Calibrator}
+
+W3OH has been extensively and intensively studied with the interferometer.
+Its flux is very well known between 84 and 115 GHz. Moreover its structure,
+partially resolved by the interferometer (except on short baselines) is
+easy to model. This is the reason why W3OH is observed about 10-15 minutes
+in CROSS-CORRELATION mode in all porjects. The command SOLVE FLUX takes now
+into account this model by comparing its flux to the predicted flux.  This
+is very usefull to check that your flux determination is good.  Check it by
+doing:
+ 
+\begin{verbatim}
+        CLIC\SET SOURCE W3OH
+        CLIC\SET PROC CORR
+        CLIC\FIND
+        CLIC\SOLVE FLUX (On all cross-correlations) 
+\end{verbatim} 
+
+
+\section{The FLUX program}
+
+FLUX is a superset of ASTRO which incorporates a new language (called FLUX)
+to allow the derivation of fluxes from pointings scans made in single-dish
+or interferometric modes. One has to use the following sequence:
+ 
+\begin{verbatim}
+
+FLUX\FILE filename
+    - Define the entry file 'filename' (produced by PRINT FLUX/OUT)     
+
+FLUX\READ antenna frequency 
+    - Read the gaussian fits data from the antenna number 
+      'antenna' and the frequency 'frequency'. 
+
+ASTRO\SET FLUX name flux  
+    - Attribute the flux value 'flux' to the source (usually a quasar)
+      'name'. This optional command is used when no planet measurements is 
+      available and/or as a redundant flux check on strong and well known 
+      quasars.  Note that this is an ASTRO command.
+
+FLUX\SOLVE name1 [name2 [...]]] 
+    - Use the planet or quasar 'name1' as flux reference. For a planet,
+      the flux is derived using the gain USB/LSB and the frequency 
+      informations:
+\end{verbatim}
+\centerline{\bf $Flux(planet) = \frac{S(\nu_{lsb})+ g\times
+    S(\nu_{usb})}{1+g}$ (Jy)}
+\begin{verbatim}
+      Then calculate the fluxes of all sources as described below at the 
+      ``gain corrected'' frequency: 
+\end{verbatim}
+\centerline{\bf $\nu_{flux} = \frac{\nu_{lsb}+ g\times \nu_{usb}}{1+g}$
+  GHz}
+\begin{verbatim}
+         + Correct Azimuth subscan for elevation pointing error
+         + Correct Elevation subscan for azimuth pointing error
+         + Average both subscans to derive the source intensity 
+           (with proper weighting using standard deviations)
+         + Average all independant scans on the same source (with 
+           proper weighting)
+         + Determine the  average antenna efficiency from the list 
+           of sources of known flux, with error estimate
+         + Determine the unknown fluxes, giving two error estimates:
+           Relative (only the noise in the source measurement) and 
+           Absolute (which also includes the error on antenna efficiency)
+
+FLUX\PRINT /OUTPUT file [New]
+    - Print the date and an information line on the meaning of each column,
+      then the fluxes with error bars, the frequency, the antenna number
+      and the average antenna efficiency (Jy/K), with error bars.
+    - The file can be reopened.
+ 
+FLUX\INDEX filei source/OUTPUT fileo [New]
+    - Compute the spectral index of the source 'source' from all the
+      data available on that source in the input file 'filei' (result from 
+      FLUX\PRINT).
+    - Write the results on the output file 'fileo'.
+    - The output file can be reopened.
+
+\end{verbatim}
+
+\section{Possible Improvements}
+
+A possible improvement would be consider systematically the error on the
+flux determinations using the revised command: {\tt SET FLUX 'name' 'flux'
+  'error'}, both in \astro\ and \clic.  The averaged antenna efficiencies
+would be determined with errorbars, and fluxes of secondary calibrators
+(SOLVE FLUX) would also include these errors.
+
+\section{FLUX Language Internal Help}
+\include{lclass-help-llas}
+
+\newpage \printindex{}
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -1,0 +1,31 @@
+  interface
+    subroutine lclass_pack_init(gpack_id,error)
+      use gbl_message
+      use sic_def
+      !---------------------------------------------------------------------
+      ! @ private
+      !---------------------------------------------------------------------
+      integer(kind=4), intent(in)    :: gpack_id
+      logical,         intent(inout) :: error
+    end subroutine lclass_pack_init
+  end interface
+  !
+  interface
+    subroutine lclass_pack_clean(error)
+      !---------------------------------------------------------------------
+      ! @ private
+      !---------------------------------------------------------------------
+      logical, intent(inout) :: error
+    end subroutine lclass_pack_clean
+  end interface
+  !
+  interface
+    function lsas_function(action)
+      !---------------------------------------------------------------------
+      ! @ private
+      !---------------------------------------------------------------------
+      logical :: lsas_function                 ! intent(out)
+      character(len=*), intent(in) :: action  !
+    end function lsas_function
+  end interface
+  !
